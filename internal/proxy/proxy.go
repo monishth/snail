@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/charmbracelet/log"
+	"github.com/monishth/dumb-prox/internal/middleware"
 	"github.com/monishth/dumb-prox/internal/utils"
 )
 
@@ -66,8 +67,17 @@ func copyHeader(dst, src http.Header) {
 	}
 }
 func (p *ForwardProxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	log.Info("Request:", "Address", req.RemoteAddr, "Method", req.Method, "URL", req.URL, "Host", req.Host)
+	requestID := middleware.GetRequestID(req.Context())
+	log.Info("Request:", "ID", requestID, "Address", req.RemoteAddr, "Method", req.Method, "URL", req.URL, "Host", req.Host)
+	if req.Method == http.MethodConnect {
 
+	} else {
+		p.handleHTTPRequest(w, req)
+	}
+}
+
+func (p *ForwardProxy) handleHTTPRequest(w http.ResponseWriter, req *http.Request) {
+	requestID := middleware.GetRequestID(req.Context())
 	// Ignore none http/https
 	if req.URL.Scheme != "http" && req.URL.Scheme != "https" {
 		msg := "unsupported protocol scheme " + req.URL.Scheme
@@ -95,7 +105,7 @@ func (p *ForwardProxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		log.Fatal("ServeHTTP:", err)
 	}
 	defer resp.Body.Close()
-	log.Info("Successfully Proxied: ", "Address", req.RemoteAddr, "Status", resp.Status, "header", resp.Header)
+	log.Info("Response:", "ID", requestID, "Address", req.RemoteAddr, "Status", resp.Status, "header", resp.Header)
 
 	removeHopByHopHeaders(resp.Header)
 	utils.CopyMapArray(w.Header(), resp.Header)
