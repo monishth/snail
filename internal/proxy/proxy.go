@@ -1,7 +1,6 @@
 package proxy
 
 import (
-	"github.com/charmbracelet/log"
 	"github.com/monishth/dumb-prox/internal/middleware"
 	"net/http"
 )
@@ -22,8 +21,7 @@ type ForwardProxy struct {
 }
 
 func (p *ForwardProxy) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-	requestID := middleware.GetRequestID(req.Context())
-	logger := log.With("ID", requestID)
+	logger := middleware.GetLogger(req.Context())
 	logger.Info("Request:", "Address", req.RemoteAddr, "Method", req.Method, "URL", req.URL, "Host", req.Host)
 
 	if req.Method == http.MethodConnect {
