@@ -13,7 +13,7 @@ func RequestLoggerMiddleware(next http.Handler) http.Handler {
 	return RequestIDMiddleware(http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		ctx := req.Context()
 		requestID := GetRequestID(ctx)
-		ctx = context.WithValue(ctx, requestLoggerKey, log.With("ID", requestID))
+		ctx = context.WithValue(ctx, requestLoggerKey, log.With("ID", requestID, "URL", req.URL))
 		next.ServeHTTP(w, req.WithContext(ctx))
 	}))
 }

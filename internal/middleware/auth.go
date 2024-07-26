@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/charmbracelet/log"
+	"github.com/monishth/dumb-prox/internal/auth"
 )
 
 type Credentials struct {
@@ -14,11 +15,7 @@ type Credentials struct {
 	pass string
 }
 
-type AuthProvider interface {
-	Verify(user, pass string) bool
-}
-
-func BasicAuthMiddleware(next http.Handler, authProvider AuthProvider) http.Handler {
+func BasicAuthMiddleware(next http.Handler, authProvider auth.AuthProvider) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, req *http.Request) {
 		logger := req.Context().Value(requestLoggerKey).(*log.Logger)
 		if logger == nil {

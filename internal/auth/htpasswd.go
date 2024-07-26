@@ -11,14 +11,14 @@ type HtpasswdProvider struct {
 	file *htpasswd.File
 }
 
-func NewHtpasswdProvider(filename string) HtpasswdProvider {
+func NewHtpasswdProvider(filename string) *HtpasswdProvider {
 	file, err := htpasswd.New(filename, htpasswd.DefaultSystems, nil)
 	if err != nil {
-		panic(err)
+		log.Fatalf("Could not load httpasswd file %s", err)
 	}
 	log.Info("Loaded htpasswd file successfully")
 
-	return HtpasswdProvider{file}
+	return &HtpasswdProvider{file}
 }
 
 func (h *HtpasswdProvider) Verify(user, pass string) bool {
