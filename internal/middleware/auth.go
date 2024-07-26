@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/charmbracelet/log"
-	"github.com/monishth/dumb-prox/internal/auth"
+	"github.com/monishth/snail/internal/auth"
 )
 
 type Credentials struct {

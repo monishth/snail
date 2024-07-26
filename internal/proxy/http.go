@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/charmbracelet/log"
-	"github.com/monishth/dumb-prox/internal/utils"
+	"github.com/monishth/snail/internal/utils"
 )
 
 func removeHopByHopHeaders(h http.Header) {

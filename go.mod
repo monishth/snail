@@ -1,4 +1,4 @@
-module github.com/monishth/dumb-prox
+module github.com/monishth/snail
 
 go 1.22.3
 

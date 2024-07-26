@@ -11,9 +11,9 @@ import (
 	"time"
 
 	"github.com/charmbracelet/log"
-	"github.com/monishth/dumb-prox/internal/auth"
-	"github.com/monishth/dumb-prox/internal/middleware"
-	"github.com/monishth/dumb-prox/internal/proxy"
+	"github.com/monishth/snail/internal/auth"
+	"github.com/monishth/snail/internal/middleware"
+	"github.com/monishth/snail/internal/proxy"
 )
 
 func RunServer(options ServerOptions) {

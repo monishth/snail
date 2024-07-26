@@ -1,6 +1,6 @@
 package main
 
-import "github.com/monishth/dumb-prox/cmd"
+import "github.com/monishth/snail/cmd"
 
 func main() {
 	cmd.Execute()

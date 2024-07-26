@@ -1,7 +1,7 @@
 package proxy
 
 import (
-	"github.com/monishth/dumb-prox/internal/middleware"
+	"github.com/monishth/snail/internal/middleware"
 	"net/http"
 )
 

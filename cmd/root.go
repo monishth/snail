@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/monishth/dumb-prox/internal/server"
+	"github.com/monishth/snail/internal/server"
 	"github.com/spf13/cobra"
 )
 
