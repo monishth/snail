@@ -6,9 +6,9 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "dumb-prox",
-	Short: "A quick, simple, exceptionally stupid forward proxy server",
-	Long:  "A quick, simple, exceptionally stupid forward proxy server",
+	Use:   "snail",
+	Short: "A quick, simple, faster-than-snail forward proxy server",
+	Long:  "A quick, simple, faster-than-snail forward proxy server",
 	PreRun: func(cmd *cobra.Command, args []string) {
 		switch serverOptions.AuthProvider {
 		case server.HtpasswdAuth:

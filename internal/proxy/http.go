@@ -25,14 +25,6 @@ func removeHopByHopHeaders(h http.Header) {
 	}
 }
 
-func copyHeader(dst, src http.Header) {
-	for k, vv := range src {
-		for _, v := range vv {
-			dst.Add(k, v)
-		}
-	}
-}
-
 func (p *ForwardProxy) handleHTTPRequest(w http.ResponseWriter, req *http.Request, logger *log.Logger) {
 	removeHopByHopHeaders(req.Header)
 	if req.URL.Scheme != "http" {
